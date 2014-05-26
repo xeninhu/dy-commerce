@@ -3,3 +3,4 @@ Abaixo listo as dependencias para o projeto, que não serão enviadas para o repos
 
 
 Simpletest versão 1.1.0
+SlimFramework
