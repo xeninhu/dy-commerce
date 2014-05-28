@@ -1,0 +1,14 @@
+{
+	"config": {
+        "vendor-dir": "libs"
+    },
+    "require": {
+        "doctrine/orm": "2.*",
+        "slim/slim": "2.*"
+    },
+    "autoload": {
+        "psr-0": {"Controller": "classes/",
+        		  "Entity": "classes/",
+        		  "Config": "classes/"}
+    }
+}

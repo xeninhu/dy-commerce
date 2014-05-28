@@ -1,6 +1,7 @@
-Abaixo listo as dependencias para o projeto, que n„o ser„o enviadas para o repositÛrio no github.
+Abaixo listo as dependencias para o projeto, que n√£o ser√£o enviadas para o reposit√≥rio no github.
 
 
 
-Simpletest vers„o 1.1.0
-SlimFramework
+Simpletest vers√£o 1.1.0
+SlimFramework 2.4.3 (via composer)
+Doctrine/ORM 2 (via composer)
