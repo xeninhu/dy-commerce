@@ -37,7 +37,7 @@
 		}
 		
 		public function get_success() {
-			return $this->success();
+			return $this->success;
 		}
 		
 		/**
