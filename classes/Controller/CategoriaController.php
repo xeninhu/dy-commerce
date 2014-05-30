@@ -24,7 +24,7 @@
 				return $return;
 			}
 			
-			if(!preg_match("#^[a-zA-Z ]+$#", $categoria)) {
+			if(!preg_match("#^[a-zA-Zà-úÀ-Ú ]+$#", $categoria)) {
 				$return->set_success(false);
 				$return->set_transaction_msg("Nome inválido para a categoria. Remova numeros e/ou caracteres especiais");
 				return $return;
@@ -52,7 +52,7 @@
 				$this->entity_manager->flush();
 				$return->set_success(true);
 				$return->set_transaction_msg(null);
-				$return->set_transaction_return($this->categoria);
+				$return->set_transaction_return($this->categoria->get_id());
 			}catch(DBALException $e) {
 				$return->set_success(false);
 				$return->set_transaction_msg($e->getMessage());

@@ -1,0 +1,55 @@
+<html>
+	<head>
+		<title>Inserir categoria</title>
+		<script src="../js/jquery-2.1.1.js"></script>
+        <script src="../js/underscore.js"></script>
+        <script src="../js/backbone.js"></script>
+        <script language="JavaScript">
+        	var CategoriaModel = Backbone.Model.extend({
+			    urlRoot: '../categoria',
+			    defaults: {
+			        categoria: '',
+			        pai: '',
+			        active: ''
+			    }
+			});
+			var categoria = null;
+			function insert_categoria() {
+				var pai = $("#pai").val();
+				if(pai==0)
+					pai=null;
+				console.log(categoria);
+				if(categoria==null) {
+					categoria = new CategoriaModel({
+						categoria: $("#categoria").val(),
+						pai: pai,
+						active: true
+					});
+					categoria.save();
+				}
+				else {
+					var pai = $("#pai").val();
+						if(pai==0)
+					pai=null;
+					categoria.set("id",categoria.get("transaction_return"));
+					categoria.set("categoria",$("#categoria").val());
+					categoria.set("pai",pai);
+					categoria.save();
+				}
+				
+				
+			}
+        </script>
+        
+	</head>
+	<body>
+		<form id="form1">
+			Categoria: <input type="text" name="categoria" id="categoria"/><br>
+			Pai: <select id="pai">
+					<option value="0">Selecione um pai</option>
+				 </select>
+			<br>
+			<input type="button" value="Salvar" onclick="insert_categoria()"/>
+		</form>
+	</body>
+</html>

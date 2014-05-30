@@ -4,17 +4,25 @@
 	
 	use Slim\Slim;
 	use Controller\CategoriaController;
-	
-	
-	
-	//Slim::registerAutoloader();
+
 	$app = new Slim();
 	
-	$app->response()->header('Content-Type', 'application/json;charset=utf-8');
+	//Cliente
+	
 	
 	$app->get('/', function () {
 		echo "Dynamic Commerce";
 	});
+	
+	/**
+	 * Página de inserir categoria
+	 */
+	$app->get('/client/:template', function ($template) use ($app) {
+		$app->response()->header('Content-Type', 'text/html;charset=utf-8');
+		$app->render("../templates/".$template.".html");
+	});
+	
+	//Serviços
 	
 	/**
 	 *
@@ -24,6 +32,7 @@
 	 * @params pai
 	 */
 	$app->post('/categoria/', function() use ($app){
+		$app->response()->header('Content-Type', 'application/json;charset=utf-8');
 		$params = json_decode($app->request()->getBody());
 		$controller = new CategoriaController();
 		$return = $controller->insert_categoria($params->categoria,$params->pai);

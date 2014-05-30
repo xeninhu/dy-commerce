@@ -1,7 +1,11 @@
 Abaixo listo as dependencias para o projeto, que não serão enviadas para o repositório no github.
 
-
-
+[PHP] - Pasta libs
 Simpletest versão 1.1.0
 SlimFramework 2.4.3 (via composer)
 Doctrine/ORM 2 (via composer)
+
+[JS] - Pasta js
+Jquery
+backbone
+underscore

@@ -79,5 +79,73 @@
 			$ent_manager->flush();
 		}
 		
+		/**
+		 * Uma categoria não poderá ter mais que 50 caracteres.
+		 */
+		function test_name_has_less_then_50() {
+			
+			$cat_controller = new CategoriaController();
+			$return = $cat_controller->insert_categoria("grand father cat test asdpoifas asdpo poasid ipoas poas mpompasoospasoifaso  fsdsipoasdj aspod sdiooapsodi idospaoi iospaosi dipas", null);
+			$this->assertFalse($return->get_success()); 
+			
+			$bs_instance = Bootstrap::get_instance();
+			$ent_manager = $bs_instance->get_entity_manager();
+			
+			$categoria = $ent_manager->getRepository("Entity\Categoria")->findOneBy(array("categoria"=>
+																			 "grand father cat test asdpoifas asdpo poasid ipoas poas mpompasoospasoifaso  fsdsipoasdj aspod sdiooapsodi idospaoi iospaosi dipas"));																			 
+			$this->assertNull($categoria);
+			
+		}
+		
+		/**
+		 * Uma categoria não poderá possuir símbolos ou números em sua composição.
+		 */
+		function test_name_has_no_numbers_or_special_chars() {
+			$cat_controller = new CategoriaController();
+			$return = $cat_controller->insert_categoria("n40 Pod3 pegar", null);
+			$this->assertFalse($return->get_success()); 
+			
+			$cat_controller = new CategoriaController();
+			$return = $cat_controller->insert_categoria("n Pod&e pegar", null);
+			$this->assertFalse($return->get_success()); 
+			
+			$cat_controller = new CategoriaController();
+			$return = $cat_controller->insert_categoria("n Pod!e pegar", null);
+			$this->assertFalse($return->get_success()); 
+			
+			$bs_instance = Bootstrap::get_instance();
+			$ent_manager = $bs_instance->get_entity_manager();
+			
+			$flush = false;
+			
+			$categoria = $ent_manager->getRepository("Entity\Categoria")->findOneBy(array("categoria"=>"n40 Pod3 pegar"));
+			$this->assertNull($categoria);
+			if($categoria!=null) {
+				$ent_manager->remove($categoria);
+				$flush=true;
+			}
+			$categoria = $ent_manager->getRepository("Entity\Categoria")->findOneBy(array("categoria"=>"n Pod&e pegar"));
+			$this->assertNull($categoria);
+			if($categoria!=null) {
+				$ent_manager->remove($categoria);
+				$flush=true;
+			}
+			$categoria = $ent_manager->getRepository("Entity\Categoria")->findOneBy(array("categoria"=>"n Pod!e pegar"));
+			$this->assertNull($categoria);
+			if($categoria!=null) {
+				$ent_manager->remove($categoria);
+				$flush=true;
+			}
+			$categoria = $ent_manager->getRepository("Entity\Categoria")->findOneBy(array("categoria"=>"n Podã pegar"));
+			$this->assertNull($categoria);
+			if($categoria!=null) {
+				$ent_manager->remove($categoria);
+				$flush=true;
+			}
+			
+			if($flush)
+				$ent_manager->flush();
+			
+		}
 	}
 ?>
