@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<title>
+			Dynamic commerce
+		</title>
+		<script src="js/jquery-2.1.1.js"></script>
+        <script src="js/underscore.js"></script>
+        <script src="js/backbone.js"></script>
+        <script src="js/principal.js"></script>
+        <script language="JavaScript">
+        	function pagina_categoria() {
+        		TemplateManager.get(
+        			"inserir_categoria",
+        			function(html_template) {
+        				var template = _.template(html_template, {});
+						$("#conteudo").html(template);
+        			}
+        		)
+        		
+			}
+			
+        </script>
+	</head>
+	<body>
+		<label id="ins_categoria" onclick="pagina_categoria()"> categoria</label>
+		<div id="conteudo"></div>
+	</body>
+</html>

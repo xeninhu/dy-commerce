@@ -7,31 +7,31 @@
 	 * @Entity
 	 * @Table(name="categoria")
 	 */
-	Class Categoria
+	Class Categoria 
 	{
 	    /**
 	     * @Id
 	     * @GeneratedValue(strategy="AUTO")
 	     * @Column(type="integer", name="id")
 	     */
-	    protected $id;
+	    public $id;
 	 
 	    /**
 	     * @Column(type="string", name="categoria", unique=true)
 	     */
-	    protected $categoria;
+	    public $categoria;
 		
 		/**
 		 * @ManyToOne(targetEntity="Categoria")
      	 * @JoinColumn(name="id", referencedColumnName="id")
 		 * @Column(type="integer",name="categoria_id")
 		 */
-		protected $pai;
+		public $pai;
 		
 		/**
 		 * @Column(type="boolean",name="active")
 		 */
-		protected $active;
+		public $active;
 	 
 	    public function get_id()
 	    {
@@ -63,6 +63,16 @@
 		public function set_active($active) {
 			$this->active = $active;
 		}
+	 
+	 	/*public function jsonSerialize() {
+			foreach ($this as $key => $value) {
+				if($key=="pai")
+					$json->$key = $value->jsonSerialize();
+				else 
+					$json->$key = $value;
+			}
+			return $json;
+	 	}*/
 	 
 	}
 ?>

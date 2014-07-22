@@ -16,6 +16,14 @@
 			$this->entity_manager = $singleton->get_entity_manager();
 		}
 		
+		public function list_categorias() {
+			$return = new ReturnObj();
+			$categorias = $this->entity_manager->getRepository("Entity\Categoria")->findBy(array("pai"=>null));
+			$return->set_success(true);
+			$return->set_transaction_return($categorias);
+			return $return;
+		}
+		
 		public function insert_categoria($categoria,$pai) {
 			$return = new ReturnObj();
 			if(strlen($categoria)>50) {

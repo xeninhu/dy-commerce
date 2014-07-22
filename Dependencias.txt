@@ -7,5 +7,6 @@ Doctrine/ORM 2 (via composer)
 
 [JS] - Pasta js
 Jquery
+Jquery Templates
 backbone
 underscore
