@@ -3,17 +3,30 @@
 		<title>
 			Dynamic commerce
 		</title>
+		<link rel="stylesheet" href="css/jquery-ui.min.css">
 		<script src="js/jquery-2.1.1.js"></script>
+		<script src="js/jquery-ui.min.js"></script>
         <script src="js/underscore.js"></script>
         <script src="js/backbone.js"></script>
         <script src="js/principal.js"></script>
         <script language="JavaScript">
+        	function init() {
+        		$.ajaxSetup({ cache: false });
+        	}
         	function pagina_categoria() {
+        		
         		TemplateManager.get(
         			"inserir_categoria",
         			function(html_template) {
-        				var template = _.template(html_template, {});
-						$("#conteudo").html(template);
+        				$.get(
+        					"categoria",
+        					function(categorias) {
+        						console.log(categorias.transaction_return);
+        						var template = _.template(html_template, {categorias:categorias.transaction_return});
+								$("#conteudo").html(template);
+        					}
+        				)
+        				
         			}
         		)
         		
@@ -21,8 +34,15 @@
 			
         </script>
 	</head>
-	<body>
+	<body onload="init()">
 		<label id="ins_categoria" onclick="pagina_categoria()"> categoria</label>
 		<div id="conteudo"></div>
+		<div id="dialog-message" title="Operação realizada com sucesso" style="display: none;">
+		  <p>
+		    <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+		    <span id="conteudo_modal">teste</span>
+		  </p>
+		  
+		</div>
 	</body>
 </html>

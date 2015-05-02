@@ -9,6 +9,7 @@
     "autoload": {
         "psr-0": {"Controller": "classes/",
         		  "Entity": "classes/",
-        		  "Config": "classes/"}
+        		  "Config": "classes/",
+        		  "API": "classes/"}
     }
 }

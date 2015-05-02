@@ -20,7 +20,11 @@
 			$return = new ReturnObj();
 			$categorias = $this->entity_manager->getRepository("Entity\Categoria")->findBy(array("pai"=>null));
 			$return->set_success(true);
-			$return->set_transaction_return($categorias);
+			$categorias_s = array();
+			foreach($categorias as $categoria) {
+				$categorias_s[] = $categoria->serialize_to_json();
+			}
+			$return->set_transaction_return($categorias_s);
 			return $return;
 		}
 		

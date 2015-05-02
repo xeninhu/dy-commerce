@@ -2,36 +2,37 @@
 
 	namespace Entity;
 	
+	use API\JsonSerializable;
 	/**
 	 *
 	 * @Entity
 	 * @Table(name="categoria")
 	 */
-	Class Categoria 
+	Class Categoria implements JsonSerializable
 	{
 	    /**
 	     * @Id
 	     * @GeneratedValue(strategy="AUTO")
 	     * @Column(type="integer", name="id")
 	     */
-	    public $id;
+	    protected $id;
 	 
 	    /**
 	     * @Column(type="string", name="categoria", unique=true)
 	     */
-	    public $categoria;
+	    protected $categoria;
 		
 		/**
 		 * @ManyToOne(targetEntity="Categoria")
      	 * @JoinColumn(name="id", referencedColumnName="id")
 		 * @Column(type="integer",name="categoria_id")
 		 */
-		public $pai;
+		protected $pai;
 		
 		/**
 		 * @Column(type="boolean",name="active")
 		 */
-		public $active;
+		protected $active;
 	 
 	    public function get_id()
 	    {
@@ -64,15 +65,18 @@
 			$this->active = $active;
 		}
 	 
-	 	/*public function jsonSerialize() {
+	 	public function serialize_to_json() {
+	 		$json = array();
 			foreach ($this as $key => $value) {
-				if($key=="pai")
-					$json->$key = $value->jsonSerialize();
+				if($value == null)
+					$json[$key] = null;
+				else if($key=="pai")
+					$json[$key] = $value->serialize_to_json();
 				else 
-					$json->$key = $value;
+					$json[$key] = $value;
 			}
 			return $json;
-	 	}*/
+	 	}
 	 
 	}
 ?>
